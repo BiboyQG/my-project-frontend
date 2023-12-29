@@ -1,13 +1,15 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Login from "./component/login.component";
+import Welcome from "./routes/welcome.component";
 
 function App() {
   return (
-    <div>
-      <p>Hello!</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<Welcome />}>
+        <Route index element={<Login />} />
+      </Route>
+    </Routes>
   );
 }
 
