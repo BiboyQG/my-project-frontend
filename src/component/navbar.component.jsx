@@ -16,12 +16,15 @@ import { SearchIcon } from "./logo-and-icon/SearchIcon.component";
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { logout } from "../net";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbarr() {
 
+  const navigate = useNavigate();
+
   const handleLogout = () => { 
     logout(() => {
-      location.href = "/login";
+      navigate("/login");
     });
   }
 

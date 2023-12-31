@@ -1,6 +1,11 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const authItemName = "access_token";
+
+const notifyLoginSuccess = () => toast.success("Login success!");
+
+const notifyLogoutSuccess = () => toast.success("Logout success!");
 
 const defaultFailure = (message, code, url) => {
   console.warn(`Request to ${url} failed with code ${code}: ${message}`);
@@ -9,7 +14,7 @@ const defaultFailure = (message, code, url) => {
 
 const defaultError = (err) => {
   console.error(err);
-  alert("Something wrong happend, please consult an admin");
+  alert("Error sign in: " + err || "Unknown error");
 };
 
 function internalPost(
@@ -86,7 +91,7 @@ function storeToken(token, remember, expire) {
     }
 }
 
-function login(username, password, remember, success, failure, error) {
+function login(username, password, remember, success, failure) {
   internalPost(
     "/api/auth/login",
     {
@@ -97,12 +102,11 @@ function login(username, password, remember, success, failure, error) {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     (data) => {
-        alert(`Login success! Welcome, ${data.username}!`);
+        notifyLoginSuccess();
         storeToken(data.token, remember, data.expire);
         success(data);
     },
-    failure,
-    error
+    failure
   );
 }
 
@@ -125,7 +129,7 @@ function post(url, data, success, failure = defaultFailure) {
 function logout(success, failure = defaultFailure) {
   get("/api/auth/logout", () => {
     deleteToken();
-    alert("Logout success!");
+    notifyLogoutSuccess();
     success();
   }, failure);
 }

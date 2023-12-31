@@ -2,8 +2,8 @@ import { Button, Checkbox, Link, Divider } from "@nextui-org/react";
 import FormInput from "./form-input/form-input.component";
 import { useEffect, useState } from "react";
 import { login } from "../net";
-
-
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const defaultFormFields = {
   email: "",
@@ -14,6 +14,8 @@ const defaultFormFields = {
 const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password, remember } = formFields;
+  const navigate = useNavigate();
+  const notifyLoginFailed = () => toast.error("Username/email or password incorrect!");
   
   useEffect(() => { 
     console.log(formFields);
@@ -28,7 +30,9 @@ const Login = () => {
     event.preventDefault();
     try {
       login(email, password, remember, () => {
-        location.href = "/";
+        navigate("/");
+      }, () => { 
+        notifyLoginFailed();
       });
     } catch (error) {
       alert(error.message);
