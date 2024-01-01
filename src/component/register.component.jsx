@@ -1,21 +1,22 @@
-import { Button, Checkbox, Link, Divider } from "@nextui-org/react";
+import { Button, Divider } from "@nextui-org/react";
 import FormInput from "./form-input/form-input.component";
 import { useState } from "react";
-import { login } from "../net";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const defaultFormFields = {
   email: "",
   password: "",
-  remember: true
+  passwordConfirm: "",
+  username: "",
+  code: "",
 };
 
-const Login = () => {
+const Register = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password, remember } = formFields;
+  const { email, password, username, passwordConfirm, code } = formFields;
   const navigate = useNavigate();
-  const notifyLoginFailed = () => toast.error("Username/email or password incorrect!");
+  const notifyPasswordNotSame = () => toast.error("Passwords not the same!");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,43 +25,32 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      login(email, password, remember, () => {
-        
-        navigate("/");
-      }, () => { 
-        notifyLoginFailed();
-      });
-    } catch (error) {
-      alert(error.message);
+    if (password !== passwordConfirm) {
+      notifyPasswordNotSame();
+      return;
     }
-  };
-
-  const handleCheck = async (event) => { 
-    const { checked } = event.target;
-    setFormFields({ ...formFields, ["remember"]: checked });
   };
 
   return (
     <div className="w-96 bg-white flex flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center">
         <div className="text-4xl font-bold text-center text-gray-800">
-          Login
+          Sign up
         </div>
         <div className="text-gray-500 mt-6 text-sm">
-          Sign in with your username/email and password
+          Sign up with your username, email and password
         </div>
         <div className="w-full px-8 py-4 mt-1 rounded-lg">
           <div className="flex flex-col items-center justify-center">
             <form>
               <div className="w-full mb-8">
                 <FormInput
-                  label="Username/email"
+                  label="Username"
                   type="text"
                   required
                   onChange={handleChange}
-                  name="email"
-                  value={email}
+                  name="username"
+                  value={username}
                   icon="user"
                 />
               </div>
@@ -75,12 +65,43 @@ const Login = () => {
                   icon="lock"
                 />
               </div>
-              <div className="flex justify-between w-full">
-                <Checkbox defaultSelected onChange={handleCheck} >Remember</Checkbox>
-                <Link color href="#">
-                  Forgot
-                </Link>
+              <div className="w-full mb-8">
+                <FormInput
+                  label="Password Confirm"
+                  type="password"
+                  required
+                  onChange={handleChange}
+                  name="passwordConfirm"
+                  value={passwordConfirm}
+                  icon="lock"
+                />
               </div>
+              <div className="w-full mb-8">
+                <FormInput
+                  label="Email"
+                  type="email"
+                  required
+                  onChange={handleChange}
+                  name="email"
+                  value={email}
+                  icon="email"
+                />
+              </div>
+              <div className="w-2/3">
+                <FormInput
+                  label="Verification Code"
+                  type="password"
+                  required
+                  onChange={handleChange}
+                  name="code"
+                  value={code}
+                  icon="code"
+                />
+              </div>
+              <Button
+                color="primary"
+                variant="ghost"
+              >Send</Button>
             </form>
             <Button
               color="primary"
@@ -89,7 +110,7 @@ const Login = () => {
               fullWidth={true}
               onClick={handleSubmit}
             >
-              Sign in
+              Sign up
             </Button>
           </div>
           <Divider />
@@ -98,9 +119,9 @@ const Login = () => {
             variant="ghost"
             className="my-8"
             fullWidth={true}
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/login")}
           >
-            Sign up
+            Sign in
           </Button>
         </div>
       </div>
@@ -108,4 +129,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

@@ -9,6 +9,7 @@ import AuthRoute from "./utils/AuthRoute.jsx";
 import "react-toastify/dist/ReactToastify.css";
 
 
+
 axios.defaults.baseURL = "http://localhost:8080";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
