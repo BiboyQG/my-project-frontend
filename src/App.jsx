@@ -7,6 +7,7 @@ import Home from "./component/home.component";
 import Register from "./component/register.component";
 import { ToastContainer } from "react-toastify";
 import { Fragment } from "react";
+import Reset from "./component/reset.component";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/register" element={<Welcome />}>
           <Route index element={<Register />} />
+        </Route>
+        <Route path="/reset" element={<Welcome />}>
+          <Route index element={<Reset />} />
         </Route>
         <Route path="/" element={<Navbarr />}>
           <Route index element={<Home />} />

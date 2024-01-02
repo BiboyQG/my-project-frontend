@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from "react-router-dom";
-const allowList = ["/login", "/register"];
+const allowList = ["/login", "/register", "/reset"];
 const loginRoute = "/login";
 const indexRoute = "/";
 export default function AuthRoute(props) {
