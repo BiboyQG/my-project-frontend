@@ -27,7 +27,6 @@ const Login = () => {
     event.preventDefault();
     try {
       login(email, password, remember, () => {
-        
         navigate("/");
       }, () => { 
         notifyLoginFailed();
@@ -39,7 +38,6 @@ const Login = () => {
 
   return (
     <AnimatedPage>
-      <div className="w-96 bg-white flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center">
           <div className="text-4xl font-bold text-center text-gray-800">
             Login
@@ -103,7 +101,6 @@ const Login = () => {
             </Button>
           </div>
         </div>
-      </div>
     </AnimatedPage>
   );
 };

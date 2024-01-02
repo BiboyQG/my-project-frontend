@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
 const animations = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
+  initial: { opacity: 0 , x: 100},
+  animate: { opacity: 1 , x: 0},
+  exit: { opacity: 0 , x: -100},
 };
 
 const AnimatedPage = ({ children }) => {
@@ -13,6 +13,7 @@ const AnimatedPage = ({ children }) => {
       initial={"initial"}
       animate={"animate"}
       exit={"exit"}
+      className="w-96 flex flex-col items-center justify-center"
     >
       {children}
     </motion.div>
