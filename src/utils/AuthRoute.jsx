@@ -10,7 +10,7 @@ export default function AuthRoute(props) {
   // 这里的 token 一般是登陆成功之后拿到后端返回的 token 并通过 Cookie.set('token', token字符串， {
   //    expires: time_limit // 设置存放时间
   // })设置
-  const authObj = JSON.parse(localStorage.getItem("access_token") || "{}");
+  const authObj = JSON.parse(localStorage.getItem("access_token") || sessionStorage.getItem("access_token") || "{}");
   const token = authObj.token;
   if (token) {
     // 有 token 的状态下禁止用户回到登录页，重定向到首页

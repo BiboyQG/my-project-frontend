@@ -40,7 +40,7 @@ const Register = () => {
         <div className="text-gray-500 mt-6 text-sm">
           Sign up with your username, email and password
         </div>
-        <div className="w-full px-8 py-4 mt-1 rounded-lg">
+        <div className="w-full px-16 py-4 mt-1 rounded-lg">
           <div className="flex flex-col items-center justify-center">
             <form>
               <div className="w-full mb-8">
@@ -87,21 +87,26 @@ const Register = () => {
                   icon="email"
                 />
               </div>
-              <div className="w-2/3">
-                <FormInput
-                  label="Verification Code"
-                  type="password"
-                  required
-                  onChange={handleChange}
-                  name="code"
-                  value={code}
-                  icon="code"
-                />
+              <div className="w-full flex items-end">
+                <div className="flex-grow" style={{ marginRight: "1rem" }}>
+                  <FormInput
+                    label="Verification Code"
+                    type="text"
+                    required
+                    onChange={handleChange}
+                    name="code"
+                    value={code}
+                    icon="code"
+                  />
+                </div>
+                <Button
+                  color="primary"
+                  variant="ghost"
+                  className='-translate-y-4'
+                >
+                  Send
+                </Button>
               </div>
-              <Button
-                color="primary"
-                variant="ghost"
-              >Send</Button>
             </form>
             <Button
               color="primary"
