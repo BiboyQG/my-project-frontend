@@ -59,9 +59,6 @@ const Reset = () => {
     if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
       toast.warn("Please fill in a valid email!");
       return false;
-    } else if (email === "") {
-      toast.warn("Please fill in your email!");
-      return false;
     } else {
       return true;
     }
@@ -85,10 +82,31 @@ const Reset = () => {
     if (!code) {
       toast.warn("Please fill in your verification code!");
     }
-    //post
+    post(
+      "/api/auth/reset",
+      {
+        email: email,
+        code: code,
+        password: password,
+        password_confirm: passwordConfirm,
+      },
+      () => {
+        toast.success(
+          "You have successfully reset your account! Redirecting you to sign in page..."
+        );
+        navigate("/login");
+      },
+      (message) => {
+        toast.error(message);
+      }
+    );
   }
 
   const askCode = () => {
+    if (email === "") {
+      toast.warn("Please fill in your email!");
+      return;
+    }
     if (cooldown === 0) {
       setCooldown(60);
       get(

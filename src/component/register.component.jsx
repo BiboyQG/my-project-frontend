@@ -120,6 +120,10 @@ const Register = () => {
   }
 
   const askCode = () => {
+    if (email === '') {
+      toast.warn("Please fill in your email address!");
+      return;
+    }
     if (cooldown === 0) {
       setCooldown(60);
       get(`/api/auth/ask-code?email=${email}&type=register`, () => {
