@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "autoprefixer": "^10.4.17",
     "axios": "^1.6.3",
     "framer-motion": "^10.16.16",
+    "postcss": "^8.4.33",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
