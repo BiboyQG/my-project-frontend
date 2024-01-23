@@ -8,7 +8,8 @@ import axios from "axios";
 import AuthRoute from "./utils/AuthRoute.jsx";
 import "react-toastify/dist/ReactToastify.css";
 
-axios.defaults.baseURL = "http://localhost:8080";
+// axios.defaults.baseURL = "http://localhost:4433";
+axios.defaults.baseURL = "https://banghao.studio:8443";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
